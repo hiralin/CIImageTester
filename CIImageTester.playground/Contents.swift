@@ -41,8 +41,8 @@ func filtered(sourceImage: UIImage) -> UIImage
 // フィルタをかけたい画像
 let inputImage = #imageLiteral(resourceName: "IMG_0003.JPG")
 
-// 出力先ディレクトリはこちら
 let rootDir = playgroundSharedDataDirectory
+print("出力先ディレクトリはこちら")
 print(rootDir)
 
 try! FileManager.default.createDirectory(at: rootDir, withIntermediateDirectories: true, attributes: nil)
