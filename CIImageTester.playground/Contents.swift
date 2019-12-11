@@ -43,8 +43,8 @@ func filtered(sourceImage: UIImage) -> UIImage
 // let sourceImage = #imageLiteral(resourceName: "IMG_0005.JPG") // 4288 sized
 //let sourceImage = #imageLiteral(resourceName: "IMG_0002.JPG")
 
-// 出力先ディレクトリはこちら
 let rootDir = playgroundSharedDataDirectory
+print("出力先ディレクトリはこちら")
 print(rootDir)
 
 for i in 1...100 {
