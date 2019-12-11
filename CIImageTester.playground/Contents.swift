@@ -48,20 +48,22 @@ let rootDir = playgroundSharedDataDirectory
 print(rootDir)
 
 for i in 1...100 {
-    let destImage = filtered(sourceImage: sourceImage)
+    autoreleasepool {
+        let destImage = filtered(sourceImage: sourceImage)
 
-    let url = rootDir.appendingPathComponent("output\(i).jpg")
-    let data = destImage.jpegData(compressionQuality: 1.0)!
+        let url = rootDir.appendingPathComponent("output\(i).jpg")
+        let data = destImage.jpegData(compressionQuality: 1.0)!
 
-    if(!FileManager.default.fileExists(atPath: rootDir.absoluteString)) {
-        do {
-            try FileManager.default.createDirectory(at: rootDir, withIntermediateDirectories: true, attributes: nil)
-        } catch {
-            print(error.localizedDescription)
+        if(!FileManager.default.fileExists(atPath: rootDir.absoluteString)) {
+            do {
+                try FileManager.default.createDirectory(at: rootDir, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
+        
+        try? data.write(to: url)
     }
-    
-    try? data.write(to: url, options: .atomic)
 }
 
 let url2 = rootDir.appendingPathComponent("default.jpg")
