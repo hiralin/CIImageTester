@@ -8,3 +8,8 @@ MacBook Pro (15-inch, 2017)
 
 # Broken preview
 ![Preview](https://github.com/hiralin/CIImageTester/blob/master/preview.jpg)
+
+# 201912/17 RESOLVED!
+This issue resolved by adding "autoreleasepool" block in each image processing loop.
+
+https://github.com/hiralin/CIImageTester/blob/master/CIImageTester.playground/Contents.swift#L54
