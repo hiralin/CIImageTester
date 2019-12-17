@@ -11,6 +11,7 @@ func toVector(x: CGFloat, y: CGFloat) -> CIVector
 func filtered(sourceImage: UIImage) -> UIImage
 {
     let filter = CIFilter(name: "CIToneCurve")!
+    filter.setDefaults()
     let ciImage = CIImage(cgImage: sourceImage.cgImage!)
     let vectors = [toVector(x: 0, y: 0),
                   toVector(x: 44, y: 65),
@@ -24,7 +25,6 @@ func filtered(sourceImage: UIImage) -> UIImage
         i = i+1
     }
     
-    filter.setDefaults()
     filter.setValue(ciImage, forKey: kCIInputImageKey)
     
     // フィルタをかけた画像を取得 (この段階で画像がおかしくなってる)
@@ -47,8 +47,11 @@ print(rootDir)
 
 try! FileManager.default.createDirectory(at: rootDir, withIntermediateDirectories: true, attributes: nil)
 
-for i in 1...100 {
-    autoreleasepool {
+for i in 1...1000 {
+    if(i % 5==0) {
+        RunLoop.current.run(until: Date.init(timeIntervalSinceNow: 0.5))
+    }
+    autoreleasepool {   // thanks to this autoreleasepool, finally resolved! CIImage & CIFilter needs memory release within each loop.
         let outputImage = filtered(sourceImage: inputImage)
 
         let url = rootDir.appendingPathComponent("output\(i).jpg")
